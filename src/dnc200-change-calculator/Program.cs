@@ -14,7 +14,6 @@ namespace dnc200_change_calculator
             decimal moneyGiven = 0;
             bool repeat = true;
             bool isCorrect = false;
-            //bool enough = true;
 
             while (repeat)
             {
@@ -59,7 +58,6 @@ namespace dnc200_change_calculator
                 if (moneyGiven > cost)
                 {
                     repeat = true;
-                    //enough = true;
                 }
                 if (moneyGiven == cost)
                 {
