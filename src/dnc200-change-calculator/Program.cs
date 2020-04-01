@@ -56,10 +56,15 @@ namespace dnc200_change_calculator
                     repeat = false;
                 }
 
-                if (moneyGiven >= cost)
+                if (moneyGiven > cost)
                 {
                     repeat = true;
                     //enough = true;
+                }
+                if (moneyGiven == cost)
+                {
+                    Console.WriteLine("No change is due");
+                    repeat = true;
                 }
             }
 
