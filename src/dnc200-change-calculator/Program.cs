@@ -48,7 +48,7 @@ namespace dnc200_change_calculator
                 }
             }
 
-            //Console.ReadKey();
+            Console.ReadKey();
         }
     }
 }
