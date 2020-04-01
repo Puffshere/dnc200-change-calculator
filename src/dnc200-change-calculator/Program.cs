@@ -14,7 +14,7 @@ namespace dnc200_change_calculator
             decimal moneyGiven = 0;
             bool repeat = true;
             bool isCorrect = false;
-            decimal answer = 0;
+            string answer = "";
 
             while (repeat)
             {
@@ -67,15 +67,16 @@ namespace dnc200_change_calculator
                 }
             }
             answer = Program.GetChange(cost, moneyGiven);
-            Console.WriteLine("$" + answer + " is the amount of changed due.");
+            Console.WriteLine("The total change due is $" + answer + ".");
 
             Console.WriteLine("Press any key to exit program . . .");
             Console.Read();
         }
-        static public decimal GetChange(decimal cost, decimal moneyGiven)
+        static public string GetChange(decimal cost, decimal moneyGiven)
         {
-            decimal change = moneyGiven - cost;
-            return change;
+            decimal changeDue = moneyGiven - cost;
+            string amountDue = Convert.ToString(changeDue);
+            return amountDue;
         }
     }
 }
