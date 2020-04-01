@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace dnc200_change_calculator
 {
@@ -13,6 +14,7 @@ namespace dnc200_change_calculator
             decimal moneyGiven = 0;
             bool repeat = true;
             bool isCorrect = false;
+            //bool enough = true;
 
             while (repeat)
             {
@@ -45,6 +47,19 @@ namespace dnc200_change_calculator
                 {
                     Console.WriteLine("Please enter a valid amount.");
                     repeat = false;
+                }
+
+
+                if (moneyGiven < cost)
+                {
+                    Console.WriteLine("You do not have enough mone to puchase item.  Add more money.");
+                    repeat = false;
+                }
+
+                if (moneyGiven >= cost)
+                {
+                    repeat = true;
+                    //enough = true;
                 }
             }
 
