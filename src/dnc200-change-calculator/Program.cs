@@ -57,14 +57,14 @@ namespace dnc200_change_calculator
         static public string GetChange(decimal cost, decimal moneyGiven)
         {
             decimal changeDue = moneyGiven - cost;
-            decimal x = moneyGiven - cost;
-            var final = new List<decimal>();
-            var finalStrings = new List<string>();
+            decimal changeDueUnchanged = moneyGiven - cost;
+            var ending = new List<decimal>();
+            var completeMessage = new List<string>();
 
             if (changeDue > 0)
             {
-                string message = "You are still owed $" + x + ".";
-                finalStrings.Add(message);
+                string message = "You are still owed $" + changeDueUnchanged + ".";
+                completeMessage.Add(message);
                 changeDue = Math.Abs(changeDue);
 
                 decimal[] amounts = { 1m, 0.25m, 0.10m, 0.05m, 0.01m };
@@ -73,19 +73,19 @@ namespace dnc200_change_calculator
                 {
                     decimal amount = Math.Floor(changeDue / amounts[i]);
                     decimal remainder = (changeDue % amounts[i]);
-                    final.Add(amount);
+                    ending.Add(amount);
                     changeDue = remainder;
                 }
             }
-            if (x == 0)
+            if (changeDueUnchanged == 0)
             {
                 string message = "No change is due.     ";
-                finalStrings.Add(message);
+                completeMessage.Add(message);
             }
 
 
             bool yes = true;
-            if (x < 0)
+            if (changeDueUnchanged < 0)
             {
                 yes = false;
                 changeDue = Math.Abs(changeDue);
@@ -95,42 +95,42 @@ namespace dnc200_change_calculator
                 {
                     decimal amount = Math.Floor(changeDue / amounts[i]);
                     decimal remainder = (changeDue % amounts[i]);
-                    final.Add(amount);
+                    ending.Add(amount);
                     changeDue = remainder;
                 }
             }
 
-            decimal[] results = final.ToArray();
+            decimal[] results = ending.ToArray();
             string answer = "";
             if (yes)
             {
                 if (results.Length > 1)
                 {
-                    string[] units = { "dollars", "quarters", "dimes", "nickels", "pennies" };
-                    string[] unitsSingular = { "dollar", "quarter", "dime", "nickel", "penny" };
+                    string[] denominationPlural = { "dollars", "quarters", "dimes", "nickels", "pennies" };
+                    string[] denominations = { "dollar", "quarter", "dime", "nickel", "penny" };
                     Console.WriteLine();
 
-                    string preface = "The total change due is:  \r\n";
-                    finalStrings.Add(preface);
+                    string amountDue = "The total change due is:  \r\n";
+                    completeMessage.Add(amountDue);
                     for (int i = 0; i < results.Length; i++)
                         if (results[i] == 1)
                         {
-                            string change = $"{results[i]} {unitsSingular[i]},\r\n";
-                            finalStrings.Add(change);
+                            string change = $"{results[i]} {denominations[i]},\r\n";
+                            completeMessage.Add(change);
                         }
                         else
                         {
-                            string change = $"{results[i]} {units[i]},\r\n";
-                            finalStrings.Add(change);
+                            string change = $"{results[i]} {denominationPlural[i]},\r\n";
+                            completeMessage.Add(change);
                         }
                 }
             }
             else
             {
                 answer = "You can not afford this item come back when you have more money.  Goodbye!    ";
-                finalStrings.Add(answer);
+                completeMessage.Add(answer);
             }
-            string[] resultArray = finalStrings.ToArray();
+            string[] resultArray = completeMessage.ToArray();
             answer = string.Join(" ", resultArray);
 
 
